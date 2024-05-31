@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="zip_code_import" resource="default" engine="innodb" comment="City and Delivery Options">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="city_name" nullable="false" length="255" comment="City Name"/>
+        <column xsi:type="varchar" name="zip_code" nullable="false" length="10" comment="Zip Code"/>
+        <column xsi:type="boolean" name="same_day_delivery" nullable="true"  comment="Same Day Delivery"/>
+        <column xsi:type="boolean" name="next_evening_delivery" nullable="true" comment="Next Evening Delivery"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

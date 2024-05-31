@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Sigma_ZipCodeImport::zipcodeimport_import" title="Import/Export Zip Code" translate="title"
+             module="Sigma_ZipCodeImport" sortOrder="20" parent="Magento_Backend::system_convert"
+             action="zipcodeimport/import" resource="Sigma_ZipCodeImport::zipcodeimport_import"/>
+    </menu>
+</config>

@@ -1,0 +1,56 @@
+<?php
+?>
+<div class="import-zipcode">
+    <?php if (!$block->getIsReadonly()): ?>
+        <div class="import-zipcode">
+            <?php if ($block->getUseContainer()): ?>
+            <form id="import-form" class="admin__fieldset" action="
+                <?= $block->escapeUrl($block->getUrl('zipcodeimport/import/importPost')) ?>"
+                  method="post" enctype="multipart/form-data">
+                <?php endif; ?>
+                <?= $block->getBlockHtml('formkey') ?>
+                <div class="fieldset admin__field">
+                    <label for="import_zipcode_file" class="admin__field-label"
+                           style="padding: 4px"><span><?= $block->escapeHtmlAttr("Import Zip Code") ?>
+                             </span></label>
+                    <div class="admin__field-control">
+                        <div class="admin_select" style="display: flex; flex-direction: column;
+                        justify-content: left; width: 50%; float: left;">
+                            <input type="file" id="import_zipcode_file" name="import_zipcode_file"
+                                   class="input-file required-entry" style="margin: 8px" />
+                            <div id="import-info" style="margin-top:10px"></div>
+                        </div>
+                        <button type="submit" class="import-submit" style="float: left">
+                            <?= $block->escapeHtmlAttr("Import Zip Code") ?>
+                        </button>
+                    </div><br>
+                </div>
+                <?php if ($block->getUseContainer()): ?>
+            </form>
+        <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="export-zipcode <?= ($block->getIsReadonly()) ? 'box-left' : 'box-right' ?>">
+        <?php if ($block->getUseContainer()):?>
+        <form id="export_form"
+              class="admin__fieldset"
+              action="<?= $block->escapeUrl($block->getUrl('zipcodeimport/export/index')) ?>"
+              method="post"
+              enctype="multipart/form-data">
+            <?php endif; ?>
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="fieldset admin__field">
+                <span class="admin__field-label"><span><?= $block->escapeHtml(__('Export Zip Code')) ?></span></span>
+                <div class="admin__field-control">
+                    <button type="submit" class="export-submit" style="float: left">
+                        <?= $block->escapeHtmlAttr("Export Zip Code") ?>
+                    </button>
+                </div>
+                </div>
+            </div>
+            <?php if ($block->getUseContainer()):?>
+        </form>
+    <?php endif; ?>
+    </div>
+</div>
