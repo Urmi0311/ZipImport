@@ -108,9 +108,9 @@ class CsvImportHandler
                 $sameDayDelivery = $row['same_day_delivery'] === '' ||
                 $row['same_day_delivery'] === null ? null :
                     filter_var($row['same_day_delivery'], FILTER_VALIDATE_BOOLEAN);
-                $nextEveningDelivery = $row['next_evening_delivery'] === '' ||
-                $row['next_evening_delivery'] === null ? null :
-                    filter_var($row['next_evening_delivery'], FILTER_VALIDATE_BOOLEAN);
+                $nextEveningDelivery = $row['tomorrow_night_delivery'] === '' ||
+                $row['tomorrow_night_delivery'] === null ? null :
+                    filter_var($row['tomorrow_night_delivery'], FILTER_VALIDATE_BOOLEAN);
 
                 $existingRecord = $connection->fetchRow(
                     $connection->select()
@@ -122,7 +122,7 @@ class CsvImportHandler
                     $data = [
                         'city_name' => $row['city_name'],
                         'same_day_delivery' => $sameDayDelivery,
-                        'next_evening_delivery' => $nextEveningDelivery,
+                        'tomorrow_night_delivery' => $nextEveningDelivery,
                     ];
                     $where = ['zip_code = ?' => $row['zip_code']];
                     $connection->update($tableName, $data, $where);
@@ -132,7 +132,7 @@ class CsvImportHandler
                         'city_name' => $row['city_name'],
                         'zip_code' => $row['zip_code'],
                         'same_day_delivery' => $sameDayDelivery,
-                        'next_evening_delivery' => $nextEveningDelivery,
+                        'tomorrow_night_delivery' => $nextEveningDelivery,
                     ];
                     $connection->insert($tableName, $data);
                     $this->logger->info('Inserted new record for zip code: ' . $data['zip_code']);
@@ -180,9 +180,9 @@ class CsvImportHandler
     protected function validateRow(array $row)
     {
         if (!isset($row['zip_code']) || !isset($row['same_day_delivery']) ||
-            !isset($row['next_evening_delivery']) || !isset($row['city_name'])) {
+            !isset($row['tomorrow_night_delivery']) || !isset($row['city_name'])) {
             throw new LocalizedException(__('The CSV file must contain the columns: city_name, zip_code,
-             same_day_delivery, next_evening_delivery.'));
+             same_day_delivery, tomorrow_night_delivery.'));
         }
 
         if (empty($row['zip_code'])) {
@@ -200,8 +200,8 @@ class CsvImportHandler
             throw new LocalizedException(__('Same day field is empty.'));
         }
 
-        if ($isNextEveningDeliveryEnabled && ($row['next_evening_delivery'] === '' ||
-                $row['next_evening_delivery'] === null)) {
+        if ($isNextEveningDeliveryEnabled && ($row['tomorrow_night_delivery'] === '' ||
+                $row['tomorrow_night_delivery'] === null)) {
             throw new LocalizedException(__('Next evening field is empty.'));
         }
 
@@ -209,8 +209,8 @@ class CsvImportHandler
             throw new LocalizedException(__('The value for same_day_delivery must be either 0 or 1.'));
         }
 
-        if (!empty($row['next_evening_delivery']) && !in_array($row['next_evening_delivery'], ['0', '1'], true)) {
-            throw new LocalizedException(__('The value for next_evening_delivery must be either 0 or 1.'));
+        if (!empty($row['tomorrow_night_delivery']) && !in_array($row['tomorrow_night_delivery'], ['0', '1'], true)) {
+            throw new LocalizedException(__('The value for tomorrow_night_delivery must be either 0 or 1.'));
         }
     }
 

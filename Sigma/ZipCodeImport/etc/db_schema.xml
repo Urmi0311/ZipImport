@@ -5,7 +5,7 @@
         <column xsi:type="varchar" name="city_name" nullable="false" length="255" comment="City Name"/>
         <column xsi:type="varchar" name="zip_code" nullable="false" length="10" comment="Zip Code"/>
         <column xsi:type="boolean" name="same_day_delivery" nullable="true"  comment="Same Day Delivery"/>
-        <column xsi:type="boolean" name="next_evening_delivery" nullable="true" comment="Next Evening Delivery"/>
+        <column xsi:type="boolean" name="tomorrow_night_delivery" nullable="true" comment="Tomorrow Night Delivery"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>

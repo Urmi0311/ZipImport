@@ -70,7 +70,7 @@ class Index extends Action
             $tableName = $this->resourceConnection->getTableName('zip_code_import');
 
             $data = [];
-            $data[] = ['city_name', 'zip_code', 'same_day_delivery', 'next_evening_delivery'];
+            $data[] = ['city_name', 'zip_code', 'same_day_delivery', 'tomorrow_night_delivery'];
 
             $query = $connection->select()->from($tableName);
             $results = $connection->fetchAll($query);
@@ -80,7 +80,7 @@ class Index extends Action
                     $row['city_name'],
                     $row['zip_code'],
                     $row['same_day_delivery'],
-                    $row['next_evening_delivery']
+                    $row['tomorrow_night_delivery']
                 ];
             }
             $this->logger->info('Exporting zip codes.', ['data' => $data]);
